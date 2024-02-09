@@ -21,7 +21,7 @@ body {
 #no-button {
     margin: 0 10px;
     color: white;
-    background-color: red;
+    background-color: rgb(255, 4, 4);
     height: 40px !important;
     width: auto;
     border: none;
@@ -38,7 +38,7 @@ body {
     margin: 0 10px;
     color: white;
     border: none;
-    background-color: green;
+    background-color: rgb(0, 255, 0);
     cursor: pointer;
     height: 40px;
 
