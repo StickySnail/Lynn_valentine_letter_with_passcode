@@ -47,6 +47,7 @@ inputs.forEach((input, index1) => {
   });
 });
 
+let messageContainer = document.getElementsByClassName('message-container')[0];
 button.addEventListener('click', function (event) {
   // Prevent the form from being submitted.
   event.preventDefault;
@@ -69,7 +70,6 @@ button.addEventListener('click', function (event) {
         // show author
         // show message bleow message section
         let author = document.getElementsByClassName('author')[0];
-        let messageContainer = document.getElementsByClassName('message-container')[0];
         author.style.display = 'block';
         messageContainer.style.display = 'block';
       }
