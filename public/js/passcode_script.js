@@ -40,6 +40,7 @@ inputs.forEach((input, index1) => {
     //add active class if not then remove the active class.
     if (!inputs[3].disabled && inputs[3].value !== "") {
       button.classList.add("active");
+      button.focus();
       return;
     }
     button.classList.remove("active");
@@ -52,7 +53,6 @@ button.addEventListener('click', function (event) {
   let code = "";
   inputs.forEach((input) => {
     code += String(input.value);
-    console.log(code);
   });
 
   if (code === '1111') {
@@ -66,11 +66,12 @@ button.addEventListener('click', function (event) {
         clearInterval(timer);
         passcode.style.display = 'none'; // Hide the element after it's fully transparent
 
-        // show message div
-        let message = document.getElementsByClassName('message')[0];
+        // show author
+        // show message bleow message section
         let author = document.getElementsByClassName('author')[0];
-        message.style.display = 'block';
-        author.style.display = 'block'; 
+        let messageContainer = document.getElementsByClassName('message-container')[0];
+        author.style.display = 'block';
+        messageContainer.style.display = 'block';
       }
       passcode.style.opacity = opacity;
       opacity -= 0.01; // Decrease the opacity
@@ -86,23 +87,48 @@ function refershpage() {
   location.reload();
 }
 
-let messages = Array.from(document.getElementsByClassName('message'));
-let buttons = Array.from(document.getElementsByClassName('button-next'));
-buttons.forEach((button, index) => {
-  button.addEventListener('click', function () {
-    messages[index].classList.remove('active');
-    if (index < messages.length - 1) {
-      messages[index + 1].classList.add('active');
-    }
-  });
-});
+//messages
+// Get all the messages and the next button
+var messages = Array.from(document.querySelectorAll('.message'));
+var nextButton = document.querySelector('.button-next');
+
+// Initialize a counter to keep track of the current message
+var currentMessageIndex = 0;
+
+// Function to show the next message
+function showNextMessage() {
+  // Hide the current message
+  if (messages[currentMessageIndex]) {
+    messages[currentMessageIndex].style.display = 'none';
+  }
+
+  // Increment the counter
+  currentMessageIndex++;
+  console.log(currentMessageIndex);
+  // If there is a next message, show it
+  if (currentMessageIndex < messages.length) {
+    messages[currentMessageIndex].style.display = 'block';
+  } else {
+    // If there are no more messages, hide the button
+    nextButton.style.display = 'none';
+    messageContainer.style.display = 'none';
+  }
+}
+
+nextButton.addEventListener('click', showNextMessage);
+
+// Show the first message initially
+if (messages[0]) {
+  messages[0].style.display = 'block';
+}
+
 
 //focus the first input which index is 0 on window load
 window.addEventListener("load", () => inputs[0].focus());
 
 // Choloate Rain
 document.querySelectorAll('.drop').forEach(drop => {
-  drop.style.animationDuration = `${Math.random() * 2 + 2}s`;
+  drop.style.animationDuration = `${Math.random() * 2 + 3.5}s`;
   drop.style.animationDelay = `${Math.random() * 5}s`;
   drop.style.width = `${Math.random() * 100}px`;
   drop.style.left = `${Math.random() * 100}vw`; // Randomize the horizontal
